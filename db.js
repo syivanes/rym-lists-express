@@ -1,11 +1,7 @@
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize({
-  database: 'rym-lists',
-  username: 'sergeyivanes',
-  password: null,
+const sequelize = new Sequelize('rym-lists', 'sergeyivanes', '', {
   host: 'localhost',
-  dialect: 'postgres',
-  protocol: 'postgres'
+  dialect: 'postgres'
 });
 
 module.exports = sequelize;

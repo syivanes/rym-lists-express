@@ -121,15 +121,13 @@ class Transaction {
         this.connection = connection;
         this.connection.uuid = this.id;
       })
-      .then(() => {
-        return this.begin()
-          .then(() => this.setDeferrable())
-          .then(() => this.setIsolationLevel())
-          .then(() => this.setAutocommit())
-          .catch(setupErr => this.rollback().finally(() => {
-            throw setupErr;
-          }));
-      })
+      .then(() => this.begin())
+      .then(() => this.setDeferrable())
+      .then(() => this.setIsolationLevel())
+      .then(() => this.setAutocommit())
+      .catch(setupErr => this.rollback().finally(() => {
+        throw setupErr;
+      }))
       .tap(() => {
         if (useCLS && this.sequelize.constructor._cls) {
           this.sequelize.constructor._cls.set('transaction', this);
